@@ -63,12 +63,13 @@
         <input class="colorPic" id="color2" data-jscolor="{value: '#56B2DD'}">
       </colors>
 
-      <preview title="for preview right click GfXPreview layer and select Interact">
+  <preview title="for preview right click GfXPreview layer and select Interact">
       </preview>
+      
 
-      <buttons></buttons>
-      <autoAnimOut>
-      </autoAnimOut>
+      <buttons></buttons> 
+
+      <autoAnimOut></autoAnimOut>
     </div>
 
     <div class="showFormHotspot">	
@@ -234,12 +235,12 @@ function animateIn(evt){
   }
 
   // Color picker config
-  jscolor.presets.default = {format:'any', position:'bottom', previewSize:60, previewPadding: -55,
-        hideOnPaletteClick:true, backgroundColor:'rgba(101,101,101,1)', 
-        borderColor:'rgba(0,104,170,1)', borderRadius:3, padding:2, 
-        width:120, height:90, closeButton:true, 
-        buttonColor:'rgba(255,255,255,1)', buttonHeight:15, sliderSize:8, 
-        crossSize:5, }
+  jscolor.presets.default = {format:'any', position:'bottom', previewSize:160, previewPadding: -155,
+        hideOnPaletteClick:true, backgroundColor:'rgba(226,226,226,1)', 
+        borderColor:'rgba(0,104,170,1)', borderRadius:10, padding:12, borderWidth: 5,
+        width:320, height:290, closeButton:true, 
+        buttonColor:'rgba(69,69,69,1)', buttonHeight:35, sliderSize:15,
+        crossSize:15, }
 </script>
 <!-- END OF CONTROLS -->
 
@@ -557,20 +558,20 @@ function animateIn(evt){
         }
     };
    
-    const bcPrev = new BroadcastChannel('preview'); //Receives from the source
+    // const bcPrev = new BroadcastChannel('preview'); //Receives from the source
 
     
-    bcPrev.addEventListener('message', function (event) {
-        console.log(event.data)
-        //eval(event.data)     
-        //return(new Function (event.data)());
+    // bcPrev.addEventListener('message', function (event) {
+    //     console.log(event.data)
+    //     //eval(event.data)     
+    //     //return(new Function (event.data)());
 
-        animAgumentsArr = event.data
+    //     animAgumentsArr = event.data
 
-        templateSelected = animAgumentsArr[animAgumentsArr.length - 1]
-        eval(templateSelected)(...animAgumentsArr)
+    //     templateSelected = animAgumentsArr[animAgumentsArr.length - 1]
+    //     eval(templateSelected)(...animAgumentsArr)
 
-    });
+    // });
 </script>
 <!-- END OF ANIMATIONS -->
 
@@ -579,7 +580,7 @@ function animateIn(evt){
 <style>
 /* CONTROLS */
 .formWrapper {
-  max-width: 400px;
+  max-width: 700px;
   margin-top: 30px;
   position: absolute;
   left: -400px;
@@ -588,7 +589,7 @@ function animateIn(evt){
   background-color: #6e6969;
   padding: 20px;
   border-radius: 15px;
-  font-size: 20px;
+  font-size: 35px;
 }
 
 body{
@@ -611,10 +612,9 @@ body{
   color: white;
   padding: 0px 12px;
   transition: all .2s ease-in-out;
-  display: inline-block;
+  /* display: noneinline-block; */
+  display: none;
 }
-
-
 
 .previewBtn:hover{
   background-color: #337ab7;
@@ -628,6 +628,7 @@ body{
   padding-top: 5px;
   font-size: 12px;
   line-height: 1.1;
+  display: none;
 }
 
 .animInBtn{
@@ -638,6 +639,7 @@ body{
   /* opacity: 0.8; */
   transition: all .2s ease-in-out;
   color: rgb(255, 255, 255);
+  display: none;
 }
 
 .animOutBtn{
@@ -648,6 +650,7 @@ body{
   /* opacity: 0.7; */
   transition: all .2s ease-in-out;
   color: rgb(255, 255, 255);
+  display: none;
 
 }
 
@@ -687,7 +690,7 @@ textarea{
   color: #555;
   border-radius: 4px;
   line-height: 110%;
-  margin-bottom: -5px;
+  margin-bottom: 5px;
   
 }
 
@@ -696,19 +699,19 @@ textarea{
 }
 
 .divider{
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: -15px;
 }
 
 .draggable.tab{
   line-height: 0.5;
-  margin-bottom: 8px;
-  margin-right: 5px;
+  margin-bottom: 20px;
+  margin-right: 10divipx;
   border: 1px solid #337ab7;
   border-radius: 4px 4px 4px 4px;
-  padding: 4px 4px;
+  padding: 15px 8px;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 30px;
   cursor: context-menu;
 }
 
@@ -724,10 +727,13 @@ margin-top: -18px;
 
 }
 
-
 ._jsonform-array-deleteitem, ._jsonform-array-addmore{
-  padding: 2px 6px;
-  margin-top: 0px;
+  padding: 1px 15px;
+  margin-top: 15px;
+  font-size: 45px;
+  border-radius: 12px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .form-group{
@@ -736,9 +742,9 @@ margin-top: -18px;
 }
 
 .form-control{
-  height: 60px;
-  padding: 6px 6px;
-  font-size: 20px;
+  height: 90px;
+  padding: 10px 10px;
+  font-size: 40px;
   
 }
 
@@ -751,18 +757,18 @@ label{
 }
 
 .colorPic{
-  width: 62px;
-  height: 20px;
-  font-size: 12px;
+  width: 160px;
+  height: 60px;
+  font-size: 33px;
   color: rgb(255, 255, 255);
-  border-radius: 4px;
+  border-radius: 10px;
   margin-bottom: 10px;
   
 }
 
 .colors{
   display: block;
-  margin-top: 10px;
+  margin-top: 25px;
   /* text-align: center; */
 }
 

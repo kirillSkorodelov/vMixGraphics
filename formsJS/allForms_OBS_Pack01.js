@@ -189,7 +189,7 @@ var headerForm_OBS_Pack01 =
               "key": 'headerArr[].headerDetails',
               "title": 'Details of what happened',
               "type": "textarea",
-              "height": "57px",
+              "height": "135px",
               
               "placeholder": "More details",
             }
