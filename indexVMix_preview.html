@@ -1,0 +1,405 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8">
+
+<head>
+    <link href="fonts/" rel="stylesheet">
+</head>
+
+<body>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.6.10/lottie.js" integrity="sha256-j5t8yIha0IKq9Oajlw+yBTISHC7DMh1AVIC3v1Ka6S8=" crossorigin="anonymous"></script> -->
+
+    <!-- animation data -->
+    <script src="animData/speakerOBSAnimData.js"></script>
+    <script src="animData/headerOBSAnimData.js"></script>
+    <script src="animData/placeOBSAnimData.js"></script>
+    <script src="animData/attributionOBSAnimData.js"></script>
+  
+    <div id="placeStrap" class="placeStrap"></div>
+    <!-- command example:
+    Animate in:
+    place("on", "New text", "Some text goes here", "default")
+    Animate out:
+    place("off")
+    -->
+
+    <div id="attributionStrap" class="attributionStrap"></div>
+    <!-- command example:
+    Animate in:
+    attribution('on', 'line1', 'style')
+    Animate out:
+    attribution('off')
+    -->
+
+    <div id="speakerStrap" class="speakerStrap"></div>
+    <!-- command example:
+    Animate in:
+    speaker("on", "speaker", "Position", "default")
+    Animate out:
+    speaker("off")
+    -->
+
+    <div id="headerStrap" class="headerStrap"></div>
+    <!-- command example:
+    Animate in:
+    header('on', 'headline', 'text', 'style')
+    Animate out:
+    header('off')
+     -->
+
+    <script>
+        /////ANIMATION INSTANSES
+
+        //Common parameteres
+        var commonParams = {
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            autoloadSegments: false,
+            prerender: false,
+        }
+
+        //place
+        var paramsPlace = {
+            container: document.getElementById('placeStrap'),
+            animationData: placeOBSAnimData,
+        };
+        paramsPlace = Object.assign(commonParams, paramsPlace);
+        var placeStrapAnim;
+        placeStrapAnim = lottie.loadAnimation(paramsPlace);
+
+        //attribution
+        var paramsAttribution = 
+        {
+            container: document.getElementById('attributionStrap'),
+            animationData: attributionOBSAnimData
+        };
+        paramsAttribution = Object.assign(commonParams, paramsAttribution);
+        var attributionStrapAnim;
+        attributionStrapAnim = lottie.loadAnimation(paramsAttribution);
+
+        //speaker
+        var paramsSpeaker = {
+            container: document.getElementById('speakerStrap'),
+            animationData: speakerOBSAnimData,
+            }
+        paramsSpeaker = Object.assign(commonParams, paramsSpeaker);
+        var speakerStrapAnim;
+        speakerStrapAnim = lottie.loadAnimation(paramsSpeaker);
+
+        //header
+        var paramsHeader = {
+            container: document.getElementById('headerStrap'),
+            animationData: headerOBSAnimData,
+            }
+            paramsHeader = Object.assign(commonParams, paramsHeader);
+            var headerStrapAnim;
+            headerStrapAnim = lottie.loadAnimation(paramsHeader);      
+
+        ////////////////END OF ANIMATION INSTANSES
+
+        //GO OUT FUNCTIONS
+
+        function placeStrapGoOut() {
+            if (placeStrapAnim.currentFrame > placeStrapAnim.firstFrame) {
+                placeStrapAnim.playSegments([45, 69], true);
+                setTimeout(function() {
+                    placeStrapAnim.goToAndStop(placeStrapAnim.firstFrame, true);
+                }, 1200);
+            }
+        }
+
+        function attributionStrapGoOut() {
+            if (attributionStrapAnim.currentFrame > attributionStrapAnim.firstFrame) {
+                attributionStrapAnim.playSegments([40, 69], true);
+                setTimeout(function() {
+                    attributionStrapAnim.goToAndStop(attributionStrapAnim.firstFrame, true);
+                }, 1200);
+            }
+        }
+
+        function speakerStrapGoOut() {
+            if (speakerStrapAnim.currentFrame > speakerStrapAnim.firstFrame) {
+                speakerStrapAnim.playSegments([70, 90], true);
+                setTimeout(function() {
+                    speakerStrapAnim.goToAndStop(speakerStrapAnim.firstFrame, true);
+                }, 1000);
+            }
+        }
+
+        function headerStrapGoOut() {
+            if (headerStrapAnim.currentFrame > headerStrapAnim.firstFrame) {
+                headerStrapAnim.playSegments([50, 75], true);
+
+                setTimeout(function() {
+                    headerStrapAnim.renderer.elements[0].textContainer.textContent = "";
+                    headerStrapAnim.renderer.elements[2].textContainer.textContent = "";
+                    
+                }, 990);
+
+                setTimeout(function() {
+                    headerStrapAnim.goToAndStop(headerStrapAnim.firstFrame, true);
+                }, 1200);
+            }
+        }
+
+        /////
+        /////speaker animation TEXT UPDATING AND ANIMATION LOGIC        
+
+        function speaker(action, line1, line2, colors) {
+            //GO IN
+            if (action == "on" && speakerStrapAnim.currentFrame <= speakerStrapAnim.firstFrame) {
+                speakerStrapAnim.renderer.elements[0].updateDocumentData({
+                    t: line1
+                }, 0);
+                speakerStrapAnim.renderer.elements[1].updateDocumentData({
+                    t: line2
+                }, 0);
+                speakerStrapAnim.renderer.elements[4].updateDocumentData({
+                    t: colors
+                }, 0);
+
+
+                //Animation logic
+                if (attributionStrapAnim.currentFrame != attributionStrapAnim.firstFrame) {
+                    attributionStrapGoOut();
+                    setTimeout(function() {
+                        speakerStrapAnim.playSegments([0, 30], true);
+                    }, 1200);
+                } else if (headerStrapAnim.currentFrame != headerStrapAnim.firstFrame) {
+                    headerStrapGoOut();
+                    setTimeout(function() {
+                        speakerStrapAnim.playSegments([0, 30], true);
+                    }, 1000);
+                } else {
+                    speakerStrapAnim.playSegments([0, 30], true);
+                }
+                //}
+            } else if (action == "on" && (line1 !== speakerStrapAnim.renderer.elements[0].textContainer.textContent || line2 !== speakerStrapAnim.renderer.elements[1].textContainer.textContent)) {
+
+                speakerStrapGoOut();
+                setTimeout(function() {
+                    speakerStrapAnim.renderer.elements[0].updateDocumentData({
+                        t: line1 
+                    }, 0);
+                    speakerStrapAnim.renderer.elements[1].updateDocumentData({
+                        t: line2
+                    }, 0);
+                    speakerStrapAnim.renderer.elements[4].updateDocumentData({
+                    t: colors
+                }, 0);
+                    speakerStrapAnim.playSegments([0, 30], true);
+                }, 1000);
+
+            }
+            //GO OUT
+            if (action == "off") {
+                speakerStrapGoOut();
+            }
+        };
+        /////
+
+        //// place TEXT UPDATING AND ANIMATION LOGIC
+        function place(action, line1, line2, colors) {
+
+            if (action == "on" && placeStrapAnim.currentFrame <= placeStrapAnim.firstFrame) {
+                
+                placeStrapAnim.renderer.elements[0].updateDocumentData({
+                    t: line1
+                }, 0);
+                placeStrapAnim.renderer.elements[1].updateDocumentData({
+                    t: line2
+                }, 0);
+                placeStrapAnim.renderer.elements[4].updateDocumentData({
+                    t: colors
+                }, 0);
+
+
+                //Animation logic
+                //if (attributionStrapAnim.currentFrame > 20) {
+                if (attributionStrapAnim.currentFrame != attributionStrapAnim.firstFrame) {
+                    attributionStrapGoOut();
+                    setTimeout(function() {
+                        placeStrapAnim.playSegments([0, 30], true);
+                    }, 200);
+                } else {
+                    placeStrapAnim.playSegments([0, 30], true);
+                }
+                //}
+            } else if (action == "on" && (line1 !== placeStrapAnim.renderer.elements[0].textContainer.textContent || line2 !== placeStrapAnim.renderer.elements[1].textContainer.textContent)) {
+
+                placeStrapGoOut();
+                setTimeout(function() {
+                    placeStrapAnim.renderer.elements[0].updateDocumentData({
+                        t: line1
+                    }, 0);
+                    placeStrapAnim.renderer.elements[1].updateDocumentData({
+                        t: line2
+                    }, 0);
+                    placeStrapAnim.renderer.elements[4].updateDocumentData({
+                    t: colors
+                }, 0);
+                    placeStrapAnim.playSegments([0, 30], true);
+                }, 1200);
+
+            }
+
+            if (action == "off") {
+                placeStrapGoOut();
+            }
+        };
+
+        /////attribution ANIMATION TEXT UPDATING AND ANIMATION LOGIC
+        function attribution(action, line1, colors) {
+            if (action == "on" && attributionStrapAnim.currentFrame <= attributionStrapAnim.firstFrame) {
+                attributionStrapAnim.renderer.elements[0].updateDocumentData({
+                    t: line1 
+                }, 0);
+                attributionStrapAnim.renderer.elements[3].updateDocumentData({
+                    t: colors
+                }, 0);
+
+                if (speakerStrapAnim.currentFrame != speakerStrapAnim.firstFrame) {
+                    speakerStrapGoOut();
+                    setTimeout(function() {
+                        attributionStrapAnim.playSegments([0, 35], true);
+                    }, 800);
+
+                } else if (headerStrapAnim.currentFrame != headerStrapAnim.firstFrame) {
+                    headerStrapGoOut();
+                    setTimeout(function() {
+                        attributionStrapAnim.playSegments([0, 35], true);
+                    }, 800);
+
+                } else {
+                    attributionStrapAnim.playSegments([0, 35], true);
+
+                }
+                //}
+            } else if (action == "on" && line1 !== attributionStrapAnim.renderer.elements[0].textContainer.textContent) {
+
+                attributionStrapGoOut();
+                setTimeout(function() {
+                    attributionStrapAnim.renderer.elements[0].updateDocumentData({
+                        t: line1
+                    }, 0);
+                    attributionStrapAnim.renderer.elements[3].updateDocumentData({
+                    t: colors
+                }, 0);
+                    attributionStrapAnim.playSegments([0, 35], true);
+                }, 1200);
+
+            }
+            if (action == "off") {
+                attributionStrapGoOut();
+            }
+        };
+        /////
+
+        /////header ANIMATION TEXT UPDATING AND ANIMATION LOGIC
+
+        //Text update
+        function header(action, headline, text, colors) {
+            if (action == "on" && headerStrapAnim.currentFrame <= headerStrapAnim.firstFrame) {
+                //if (headerStrapAnim.currentFrame <= headerStrapAnim.firstFrame) {
+                headerStrapAnim.renderer.elements[0].updateDocumentData({
+                    t: text.replace(/(\n)/gm, "")
+                }, 0);
+                headerStrapAnim.renderer.elements[2].updateDocumentData({
+                    t: headline
+                }, 0);
+                headerStrapAnim.renderer.elements[4].updateDocumentData({
+                    t: colors
+                }, 0);
+
+                //Animation logic    
+                if (attributionStrapAnim.currentFrame != attributionStrapAnim.firstFrame) {
+                    attributionStrapGoOut();
+                    setTimeout(function() {
+                        headerStrapAnim.playSegments([0, 30], true);
+                    }, 800);
+                } else if (speakerStrapAnim.currentFrame != speakerStrapAnim.firstFrame) {
+                    speakerStrapGoOut();
+                    setTimeout(function() {
+                        headerStrapAnim.playSegments([0, 30], true);
+                    }, 1000);
+                } else {
+                    headerStrapAnim.playSegments([0, 30], true);
+                }
+
+            } else if (action == "on" && (text !== headerStrapAnim.renderer.elements[0].textContainer.textContent || headline !== headerStrapAnim.renderer.elements[2].textContainer.textContent)) {
+
+                headerStrapGoOut();
+                setTimeout(function() {
+                    headerStrapAnim.renderer.elements[0].updateDocumentData({
+                        t: text.replace(/(\n)/gm, "")
+                    }, 0);
+                    headerStrapAnim.renderer.elements[2].updateDocumentData({
+                        t: headline
+                    }, 0);
+                    headerStrapAnim.renderer.elements[4].updateDocumentData({
+                    t: colors
+                }, 0);
+                    headerStrapAnim.playSegments([0, 30], true);
+                }, 1200);
+
+            }
+            if (action == "off") {
+                headerStrapGoOut();
+            }
+        };
+       
+        const bcPrev = new BroadcastChannel('preview'); //Receives from the source
+
+        
+        bcPrev.addEventListener('message', function (event) {
+            console.log(event.data)
+            //eval(event.data)     
+            //return(new Function (event.data)());
+
+            animAgumentsArr = event.data
+
+            templateSelected = animAgumentsArr[animAgumentsArr.length - 1]
+            eval(templateSelected)(...animAgumentsArr)
+
+        });
+
+    
+
+    </script>
+</body>
+
+<style>
+    body {
+        background-color: rgb(0, 189, 72, 0);
+        margin: 0px;
+        height: 100%;
+        overflow: hidden;
+        font-family: 'Scada', sans-serif;
+    }
+    
+    .placeStrap, .headerStrap, .attributionStrap, .speakerStrap {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: rgba(255, 255, 255, 0);
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+        text-align: center;
+        opacity: 1;
+    }
+    
+    
+    /* @font-face { font-family: scada-regular; 
+         src: url('font/Scada-Regular.ttf'); }
+    .position{
+        font-family: scada-regular;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Scada&display=swap'); */
+</style>
+
+</html>
+

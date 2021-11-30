@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Onscreen Captions controls</title>
+  <link rel="stylesheet" type="text/css" href="deps/opt/bootstrap.css" />
+
+</head>
+<body>
+  <div class="formWrapper">
+      <!-- <h1 id="title" class="title">Captions controls</h1> -->
+
+      <selectTemplate onchange="getForm()";></selectTemplate>
+
+      <hr class="divider">
+    <div id="formToShow">
+      <form id='activeForm' class='activeForm'></form>
+    </div>
+
+      <hr class="divider">
+      <colors class="colors">
+        <label for="colorpicker1">Colour1</label>
+        <input class="colorPic" id="color1" data-jscolor="{value:'#DF9912'}">
+        <!-- full colorpicker config is at the end of the script -->
+
+        <label for="colorpicker2"> | Colour2</label>
+        <input class="colorPic" id="color2" data-jscolor="{value: '#56B2DD'}">
+      </colors>
+
+      <preview title="for preview right click GfXPreview layer and select Interact">
+      </preview>
+      <buttons></buttons>
+      <autoAnimOut>
+      </autoAnimOut>
+
+  </div>
+</body>
+
+<script type="text/javascript" src="selectTemplateForm_OBS_Pack01.js"></script>
+<script type="text/javascript" src="formsJS/allForms_OBS_Pack01.js"></script>
+<script type="text/javascript" src="formsJS/buttons.js"></script>  
+<script type="text/javascript" src="deps/jquery.min.js"></script>
+<script type="text/javascript" src="deps/underscore.js"></script>
+<script type="text/javascript" src="deps/opt/spectrum.js"></script>
+<script type="text/javascript" src="deps/opt/jsv.js"></script>
+<script type="text/javascript" src="lib/jsonform.js"></script>
+<script type="text/javascript" src="deps/opt/jscolor.min.js"></script>
+
+<script type="text/javascript">
+
+version = 'Pack01'
+
+var colorOne = $('#color1')[0].value.toString().replace(/#/g,"")//doesn't work
+
+
+//show Dropdown menu
+    $('selectTemplate').jsonForm(
+        selectTemplate
+    )
+    //define without displaying the initial form
+
+    //Show the form depending on selection
+    availableForms = selectTemplate.schema.template.enum
+    
+    for (var i = 0; i < availableForms.length; i++) {
+    formName=availableForms[i].toLowerCase().replace(/ /g, "")
+    $('form').jsonForm(
+     
+      eval(formName+'Form_OBS_'+version)
+      )
+    }
+
+    $(document).ready(getForm);
+  
+
+  function getForm(){
+
+   selection = $('#templateSelect')[0].value;
+
+    formsToHide = availableForms.map(i => '.' + i + 'Form')
+    formToShow = '.'+selection+'Form'
+
+    $(formsToHide.toString()).hide()
+    $(formToShow.toString()).show()
+
+  }
+// Building the forms
+$('buttons').jsonForm(buttons)
+$('#animInBtn')[0].addEventListener('click', animateIn)
+$('#animOutBtn')[0].addEventListener('click', animateOut)
+
+$('preview').jsonForm(previewButton)
+$('#previewBtn')[0].addEventListener('click', previewOpen)
+$('autoAnimOut').jsonForm(autoAnimateOut)
+// Getting the colors
+
+var selectedTemplate = $('#templateSelect')[0].value.toLowerCase().replace(/ /g, "");
+
+// Preview function
+function previewOpen(){
+  const bcPrev = new BroadcastChannel('preview'); //sends to indexVMix_preview.html
+  setTimeout(function(){
+    
+    selectedTemplate = $('#templateSelect')[0].value.toLowerCase().replace(/ /g, "");
+          
+    ///Getting form values
+    var formDataArray = $("form :input:visible").serializeArray();
+      formValues = [];
+      for (i = 0; i < formDataArray.length; i++){
+      formValues[i] = formDataArray[i]["value"];
+    }
+
+    colorOne = $('#color1')[0].value.toString().replace(/#/g,"");
+    colorTwo = $('#color2')[0].value.toString().replace(/#/g,"");
+    newColors = colorOne.concat(',',colorTwo);
+    
+    bcPrev.postMessage(['on', ...formValues, newColors, selectedTemplate])
+    }, 150);
+    ////END OF PREVIEW TRIGGER
+
+  setTimeout(function(){
+    selectedTemplate = $('#templateSelect')[0].value.toLowerCase().replace(/ /g, "");
+    bcPrev.postMessage(["off","", "", "", "", "", "", "", "", "", selectedTemplate])
+    }, 3000)
+
+}
+
+const bc = new BroadcastChannel('output'); //sends to indexVMix.html
+function animateIn(evt){
+  evt.preventDefault();
+  
+  selectedTemplate = $('#templateSelect')[0].value.toLowerCase().replace(/ /g, "");
+  colorOne = $('#color1')[0].value.toString().replace(/#/g,"");
+  colorTwo = $('#color2')[0].value.toString().replace(/#/g,"");
+  newColors = colorOne.concat(',',colorTwo);
+
+///Getting form values
+
+  
+   var formDataArray = $("form :input:visible").serializeArray();
+    formValues = [];
+    for (i = 0; i < formDataArray.length; i++){
+    formValues[i] = formDataArray[i]["value"];
+ }
+    bc.postMessage(['on', ...formValues, newColors, selectedTemplate])//colorOne.concat(",",colorTwo)
+  
+  if ($('.autoAnimOutInput').is(':checked') == true){
+    setTimeout(function(){
+    selectedTemplate = $('#templateSelect')[0].value.toLowerCase().replace(/ /g, "");
+    bc.postMessage(["off","", "", "", "", "", "", "", "", "", selectedTemplate])
+    }, 4000)
+  }
+  }
+  
+  function animateOut(){
+    selectedTemplate = $('#templateSelect')[0].value.toLowerCase().replace(/ /g, "");
+    bc.postMessage(["off","", "", "", "", "", "", "", "", "", selectedTemplate])
+  }
+
+  // Color picker config
+  jscolor.presets.default = {format:'any', position:'bottom', previewSize:60, previewPadding: -55,
+        hideOnPaletteClick:true, backgroundColor:'rgba(101,101,101,1)', 
+        borderColor:'rgba(0,104,170,1)', borderRadius:3, padding:2, 
+        width:120, height:90, closeButton:true, 
+        buttonColor:'rgba(255,255,255,1)', buttonHeight:15, sliderSize:8, 
+        crossSize:5, }
+</script>
+  
+
+<style>
+  .formWrapper {
+  max-width: 300px;
+  margin: auto;
+  
+}
+
+body{
+  background-color: rgb(56, 56, 56);
+  color:rgb(238, 238, 238)
+}
+
+#templateSelect{
+  padding: 2px 6px;
+}
+.previewBtn{
+  background-color: #6e6969;
+  display: block;
+  width: 95%;
+  margin: auto;
+  border: 1px solid #ffffff;
+  border-radius: 4px 4px 4px 4px;
+  font-weight: bold;
+  font-size: 14;
+  color: white;
+  padding: 0px 12px;
+  transition: all .2s ease-in-out;
+
+}
+
+.previewBtn:hover{
+  background-color: #337ab7;
+  opacity: 1;
+  color: white;
+  transform: scale(1.05);
+}
+
+.help-block{
+  margin: -22px 10px -5px;
+  padding-top: 5px;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+.animInBtn{
+  background-color: rgb(0, 170, 133);
+  font-weight: bold;
+  /* margin-right: 40px; */
+  margin: 10px;
+  /* opacity: 0.8; */
+  transition: all .2s ease-in-out;
+  color: rgb(255, 255, 255);
+}
+
+.animOutBtn{
+  background-color: rgb(247, 130, 21);
+  font-weight: bold;
+  /* margin-right: 40px; */
+  margin: 10px;
+  /* opacity: 0.7; */
+  transition: all .2s ease-in-out;
+  color: rgb(255, 255, 255);
+
+}
+
+.animInBtn:hover{
+  background-color: rgb(0, 170, 133);
+  opacity: 1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.animInBtn:focus{
+  background-color: rgb(0, 170, 133);
+  opacity: 1;
+  color: white;
+}
+
+.animOutBtn:hover{
+  background-color: rgb(247, 130, 21);
+  opacity: 1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.animOutBtn:focus{
+  background-color: rgb(247, 130, 21);
+  opacity: 1;
+  color: white;
+}
+
+/* #NarrativeForm1{
+  color: #555
+} */
+
+textarea{
+  padding: 6px 6px;
+  resize: none;
+  color: #555;
+  border-radius: 4px;
+  line-height: 110%;
+  margin-bottom: -5px;
+  
+}
+
+.title{
+  font-size: 14px;
+}
+
+.divider{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.draggable.tab{
+  line-height: 0.5;
+  margin-bottom: 8px;
+  margin-right: 5px;
+  border: 1px solid #337ab7;
+  border-radius: 4px 4px 4px 4px;
+  padding: 4px 4px;
+  font-weight: normal;
+  font-size: 12px;
+  cursor: context-menu;
+}
+
+.draggable.tab:hover{
+  background-color: #337ab7;
+  opacity: 1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.nav.nav-tabs{
+margin-top: -18px;
+
+}
+
+
+._jsonform-array-deleteitem, ._jsonform-array-addmore{
+  padding: 2px 6px;
+  margin-top: 0px;
+}
+
+.form-group{
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.form-control{
+  height: 26px;
+  padding: 6px 6px;
+  
+}
+
+label{
+  font-weight: normal;
+}
+
+.autoAnimOut{
+  margin: -15px 10px 10px;
+}
+
+.colorPic{
+  width: 62px;
+  height: 20px;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  
+}
+
+.colors{
+  display: block;
+  margin-top: 10px;
+  /* text-align: center; */
+}
+
+</style>
+
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Onscreen Captions controls</title>
+  <link rel="stylesheet" type="text/css" href="deps/opt/bootstrap.css" />
+
+</head>
+<body>
+  <div class="formWrapper">
+      <!-- <h1 id="title" class="title">Captions controls</h1> -->
+
+      <selectTemplate onchange="getForm()";></selectTemplate>
+
+      <hr class="divider">
+    <div id="formToShow">
+      <form id='activeForm' class='activeForm'></form>
+    </div>
+
+      <hr class="divider">
+      <colors class="colors">
+        <label for="colorpicker1">Colour1</label>
+        <input class="colorPic" id="color1" data-jscolor="{value:'#DF9912'}">
+        <!-- full colorpicker config is at the end of the script -->
+
+        <label for="colorpicker2"> | Colour2</label>
+        <input class="colorPic" id="color2" data-jscolor="{value: '#56B2DD'}">
+      </colors>
+
+      <preview title="for preview right click GfXPreview layer and select Interact">
+      </preview>
+      <buttons></buttons>
+      <autoAnimOut>
+      </autoAnimOut>
+
+  </div>
+</body>
+
+<script type="text/javascript" src="formsJS/selectTemplateForm_OBS_Pack01.js"></script>
+<script type="text/javascript" src="formsJS/allForms_OBS_Pack01.js"></script>
+<script type="text/javascript" src="formsJS/buttons.js"></script>  
+<script type="text/javascript" src="deps/jquery.min.js"></script>
+<script type="text/javascript" src="deps/underscore.js"></script>
+<script type="text/javascript" src="deps/opt/spectrum.js"></script>
+<script type="text/javascript" src="deps/opt/jsv.js"></script>
+<script type="text/javascript" src="lib/jsonform.js"></script>
+<script type="text/javascript" src="deps/opt/jscolor.min.js"></script>
+
+<script type="text/javascript">
+
+var _0x46a24b=_0x33a0;(function(_0x2f9e64,_0x35b996){var _0x253df4=_0x33a0,_0x2d81bf=_0x2f9e64();while(!![]){try{var _0x51deb5=parseInt(_0x253df4(0x14d))/0x1*(-parseInt(_0x253df4(0x135))/0x2)+parseInt(_0x253df4(0x14f))/0x3*(-parseInt(_0x253df4(0x15f))/0x4)+parseInt(_0x253df4(0x12c))/0x5*(-parseInt(_0x253df4(0x138))/0x6)+parseInt(_0x253df4(0x153))/0x7*(-parseInt(_0x253df4(0x141))/0x8)+parseInt(_0x253df4(0x13e))/0x9+parseInt(_0x253df4(0x133))/0xa*(parseInt(_0x253df4(0x160))/0xb)+-parseInt(_0x253df4(0x159))/0xc*(-parseInt(_0x253df4(0x15c))/0xd);if(_0x51deb5===_0x35b996)break;else _0x2d81bf['push'](_0x2d81bf['shift']());}catch(_0x521af8){_0x2d81bf['push'](_0x2d81bf['shift']());}}}(_0x4961,0xb7f0f),version=_0x46a24b(0x15b));var colorOne=$('#color1')[0x0]['value'][_0x46a24b(0x147)]()[_0x46a24b(0x13d)](/#/g,'');$(_0x46a24b(0x156))[_0x46a24b(0x14e)](selectTemplate),availableForms=selectTemplate[_0x46a24b(0x139)]['template'][_0x46a24b(0x131)];function _0x4961(){var _0x4ed157=['serializeArray','#color2','#color1','enum','output','530EgNWGF','ready','2554oOdxUB',':checked','rgba(0,104,170,1)','5157942uKlGbb','schema','off','addEventListener','hide','replace','550251kADahM','any','preview','118256HGBJXi','map','toLowerCase','click','Form_OBS_','presets','toString','value','length','postMessage','Form','#previewBtn','410WvUCSV','jsonForm','4511397xzIszp','rgba(255,255,255,1)','bottom','#templateSelect','7IaLTDb','show','form','selectTemplate','autoAnimOut','preventDefault','176004mcCxlV','.autoAnimOutInput','Pack01','2015CKMWIm','buttons','rgba(101,101,101,1)','4vcREgv','274109CnuQGl','#animInBtn','5tbjLBo','default'];_0x4961=function(){return _0x4ed157;};return _0x4961();}function _0x33a0(_0x32ed0e,_0x2a0ea3){var _0x496123=_0x4961();return _0x33a0=function(_0x33a081,_0x295771){_0x33a081=_0x33a081-0x12c;var _0x137100=_0x496123[_0x33a081];return _0x137100;},_0x33a0(_0x32ed0e,_0x2a0ea3);}for(var i=0x0;i<availableForms['length'];i++){formName=availableForms[i][_0x46a24b(0x143)]()[_0x46a24b(0x13d)](/ /g,''),$(_0x46a24b(0x155))[_0x46a24b(0x14e)](eval(formName+_0x46a24b(0x145)+version));}$(document)[_0x46a24b(0x134)](getForm);function getForm(){var _0x35708e=_0x46a24b;selection=$(_0x35708e(0x152))[0x0][_0x35708e(0x148)],formsToHide=availableForms[_0x35708e(0x142)](_0x7e71c4=>'.'+_0x7e71c4+_0x35708e(0x14b)),formToShow='.'+selection+_0x35708e(0x14b),$(formsToHide[_0x35708e(0x147)]())[_0x35708e(0x13c)](),$(formToShow['toString']())[_0x35708e(0x154)]();}$(_0x46a24b(0x15d))[_0x46a24b(0x14e)](buttons),$(_0x46a24b(0x161))[0x0][_0x46a24b(0x13b)]('click',animateIn),$('#animOutBtn')[0x0]['addEventListener'](_0x46a24b(0x144),animateOut),$('preview')[_0x46a24b(0x14e)](previewButton),$(_0x46a24b(0x14c))[0x0][_0x46a24b(0x13b)](_0x46a24b(0x144),previewOpen),$(_0x46a24b(0x157))['jsonForm'](autoAnimateOut);var selectedTemplate=$(_0x46a24b(0x152))[0x0]['value']['toLowerCase']()['replace'](/ /g,'');function previewOpen(){var _0x177c97=_0x46a24b;const _0x28163c=new BroadcastChannel(_0x177c97(0x140));setTimeout(function(){var _0x41f2be=_0x177c97;selectedTemplate=$(_0x41f2be(0x152))[0x0][_0x41f2be(0x148)]['toLowerCase']()[_0x41f2be(0x13d)](/ /g,'');var _0x323227=$('form\x20:input:visible')['serializeArray']();formValues=[];for(i=0x0;i<_0x323227['length'];i++){formValues[i]=_0x323227[i]['value'];}colorOne=$(_0x41f2be(0x130))[0x0][_0x41f2be(0x148)][_0x41f2be(0x147)]()[_0x41f2be(0x13d)](/#/g,''),colorTwo=$(_0x41f2be(0x12f))[0x0]['value'][_0x41f2be(0x147)]()['replace'](/#/g,''),newColors=colorOne['concat'](',',colorTwo),_0x28163c['postMessage'](['on',...formValues,newColors,selectedTemplate]);},0x96),setTimeout(function(){var _0x2089cd=_0x177c97;selectedTemplate=$(_0x2089cd(0x152))[0x0][_0x2089cd(0x148)][_0x2089cd(0x143)]()[_0x2089cd(0x13d)](/ /g,''),_0x28163c[_0x2089cd(0x14a)]([_0x2089cd(0x13a),'','','','','','','','','',selectedTemplate]);},0xbb8);}const bc=new BroadcastChannel(_0x46a24b(0x132));function animateIn(_0x4a6a4f){var _0x2953f5=_0x46a24b;_0x4a6a4f[_0x2953f5(0x158)](),selectedTemplate=$('#templateSelect')[0x0][_0x2953f5(0x148)][_0x2953f5(0x143)]()[_0x2953f5(0x13d)](/ /g,''),colorOne=$(_0x2953f5(0x130))[0x0][_0x2953f5(0x148)][_0x2953f5(0x147)]()[_0x2953f5(0x13d)](/#/g,''),colorTwo=$(_0x2953f5(0x12f))[0x0][_0x2953f5(0x148)]['toString']()[_0x2953f5(0x13d)](/#/g,''),newColors=colorOne['concat'](',',colorTwo);var _0x2a20e3=$('form\x20:input:visible')[_0x2953f5(0x12e)]();formValues=[];for(i=0x0;i<_0x2a20e3[_0x2953f5(0x149)];i++){formValues[i]=_0x2a20e3[i][_0x2953f5(0x148)];}bc[_0x2953f5(0x14a)](['on',...formValues,newColors,selectedTemplate]),$(_0x2953f5(0x15a))['is'](_0x2953f5(0x136))==!![]&&setTimeout(function(){var _0x32d6de=_0x2953f5;selectedTemplate=$(_0x32d6de(0x152))[0x0][_0x32d6de(0x148)][_0x32d6de(0x143)]()[_0x32d6de(0x13d)](/ /g,''),bc[_0x32d6de(0x14a)](['off','','','','','','','','','',selectedTemplate]);},0xfa0);}function animateOut(){var _0x3c5017=_0x46a24b;selectedTemplate=$(_0x3c5017(0x152))[0x0][_0x3c5017(0x148)]['toLowerCase']()[_0x3c5017(0x13d)](/ /g,''),bc[_0x3c5017(0x14a)]([_0x3c5017(0x13a),'','','','','','','','','',selectedTemplate]);}jscolor[_0x46a24b(0x146)][_0x46a24b(0x12d)]={'format':_0x46a24b(0x13f),'position':_0x46a24b(0x151),'previewSize':0x3c,'previewPadding':-0x37,'hideOnPaletteClick':!![],'backgroundColor':_0x46a24b(0x15e),'borderColor':_0x46a24b(0x137),'borderRadius':0x3,'padding':0x2,'width':0x78,'height':0x5a,'closeButton':!![],'buttonColor':_0x46a24b(0x150),'buttonHeight':0xf,'sliderSize':0x8,'crossSize':0x5};
+</script>
+  
+
+<style>
+  .formWrapper {
+  max-width: 300px;
+  margin: auto;
+  
+}
+
+body{
+  background-color: rgb(56, 56, 56);
+  color:rgb(238, 238, 238)
+}
+
+#templateSelect{
+  padding: 2px 6px;
+}
+.previewBtn{
+  background-color: #6e6969;
+  display: block;
+  width: 95%;
+  margin: auto;
+  border: 1px solid #ffffff;
+  border-radius: 4px 4px 4px 4px;
+  font-weight: bold;
+  font-size: 14;
+  color: white;
+  padding: 0px 12px;
+  transition: all .2s ease-in-out;
+
+}
+
+.previewBtn:hover{
+  background-color: #337ab7;
+  opacity: 1;
+  color: white;
+  transform: scale(1.05);
+}
+
+.help-block{
+  margin: -22px 10px -5px;
+  padding-top: 5px;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+.animInBtn{
+  background-color: rgb(0, 170, 133);
+  font-weight: bold;
+  /* margin-right: 40px; */
+  margin: 10px;
+  /* opacity: 0.8; */
+  transition: all .2s ease-in-out;
+  color: rgb(255, 255, 255);
+}
+
+.animOutBtn{
+  background-color: rgb(247, 130, 21);
+  font-weight: bold;
+  /* margin-right: 40px; */
+  margin: 10px;
+  /* opacity: 0.7; */
+  transition: all .2s ease-in-out;
+  color: rgb(255, 255, 255);
+
+}
+
+.animInBtn:hover{
+  background-color: rgb(0, 170, 133);
+  opacity: 1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.animInBtn:focus{
+  background-color: rgb(0, 170, 133);
+  opacity: 1;
+  color: white;
+}
+
+.animOutBtn:hover{
+  background-color: rgb(247, 130, 21);
+  opacity: 1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.animOutBtn:focus{
+  background-color: rgb(247, 130, 21);
+  opacity: 1;
+  color: white;
+}
+
+/* #NarrativeForm1{
+  color: #555
+} */
+
+textarea{
+  padding: 6px 6px;
+  resize: none;
+  color: #555;
+  border-radius: 4px;
+  line-height: 110%;
+  margin-bottom: -5px;
+  
+}
+
+.title{
+  font-size: 14px;
+}
+
+.divider{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.draggable.tab{
+  line-height: 0.5;
+  margin-bottom: 8px;
+  margin-right: 5px;
+  border: 1px solid #337ab7;
+  border-radius: 4px 4px 4px 4px;
+  padding: 4px 4px;
+  font-weight: normal;
+  font-size: 12px;
+  cursor: context-menu;
+}
+
+.draggable.tab:hover{
+  background-color: #337ab7;
+  opacity: 1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.nav.nav-tabs{
+margin-top: -18px;
+
+}
+
+
+._jsonform-array-deleteitem, ._jsonform-array-addmore{
+  padding: 2px 6px;
+  margin-top: 0px;
+}
+
+.form-group{
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.form-control{
+  height: 26px;
+  padding: 6px 6px;
+  
+}
+
+label{
+  font-weight: normal;
+}
+
+.autoAnimOut{
+  margin: -15px 10px 10px;
+}
+
+.colorPic{
+  width: 62px;
+  height: 20px;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  
+}
+
+.colors{
+  display: block;
+  margin-top: 10px;
+  /* text-align: center; */
+}
+
+</style>
+
+
+</html>
