@@ -112,10 +112,10 @@ var colorOne = $('#color1')[0].value.toString().replace(/#/g,"")//doesn't work
 $(window).dblclick(animateIn);
 
 //Animate out on triple click (doesn't work in vMix)
-window.addEventListener('click', function (evt) {
-    if (evt.detail === 3)
-    animateOut()
-});
+// window.addEventListener('click', function (evt) {
+//     if (evt.detail === 3)
+//     animateOut()
+// });
 
 //Animate out on middleclick 
 //let clearAnim = document.getElementById('formWrapper')
@@ -579,7 +579,7 @@ function animateIn(evt){
 <style>
 /* CONTROLS */
 .formWrapper {
-  max-width: 300px;
+  max-width: 400px;
   margin-top: 30px;
   position: absolute;
   left: -400px;
@@ -588,6 +588,7 @@ function animateIn(evt){
   background-color: #6e6969;
   padding: 20px;
   border-radius: 15px;
+  font-size: 20px;
 }
 
 body{
@@ -735,8 +736,9 @@ margin-top: -18px;
 }
 
 .form-control{
-  height: 26px;
+  height: 60px;
   padding: 6px 6px;
+  font-size: 20px;
   
 }
 
