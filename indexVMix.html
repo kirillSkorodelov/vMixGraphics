@@ -111,14 +111,19 @@ var colorOne = $('#color1')[0].value.toString().replace(/#/g,"")//doesn't work
 // Animate in on double click
 $(window).dblclick(animateIn);
 
+//Animate out on triple click (doesn't work in vMix)
 window.addEventListener('click', function (evt) {
     if (evt.detail === 3)
     animateOut()
 });
 
-function alertText(){
-    alert('triple click!')
-}
+//Animate out on middleclick 
+//let clearAnim = document.getElementById('formWrapper')
+window.addEventListener('auxclick', function(e) {
+  if (e.button == 1)
+    animateOut()
+})
+
 
 //show Dropdown menu
     $('selectTemplate').jsonForm(
