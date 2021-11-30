@@ -63,13 +63,13 @@
         <input class="colorPic" id="color2" data-jscolor="{value: '#56B2DD'}">
       </colors>
 
-  <preview title="for preview right click GfXPreview layer and select Interact">
-      </preview>
+        <preview></preview>
       
 
       <buttons></buttons> 
 
       <autoAnimOut></autoAnimOut>
+      
     </div>
 
     <div class="showFormHotspot">	
@@ -754,7 +754,19 @@ label{
 }
 
 .autoAnimOut{
-  margin: -15px 10px 10px;
+  position:relative;
+  /* margin: -15px 10px 10px; */
+  left: 8%;
+  margin-top: 15px;
+}
+
+
+input[type="checkbox"] {
+    position: absolute;
+    margin-top: -2px;
+    margin-left: -70px !important; 
+    width: 60px;
+    height: 60px;
 }
 
 .colorPic{
@@ -769,7 +781,7 @@ label{
 
 .colors{
   display: block;
-  margin-top: 25px;
+  margin-top: 35px;
   /* text-align: center; */
 }
 

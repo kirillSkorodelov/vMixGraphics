@@ -42,12 +42,12 @@ var previewButton =
       "type": "button",
       "title": "Preview",
     },
-    {
-      "type": "help",
-      "helpvalue": "for preview right click \"GFX_Preview\" layer and select \"Interact\" in Sources",
-      "fieldHtmlClass": "prevHelp",
+    // {
+    //   "type": "help",
+    //   "helpvalue": "for preview right click \"GFX_Preview\" layer and select \"Interact\" in Sources",
+    //   "fieldHtmlClass": "prevHelp",
       
-    },
+    // },
     
   ],
 
