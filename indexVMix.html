@@ -96,11 +96,12 @@
 
 <script type="text/javascript">
 
+//Show/hide form function
 function showForm() {
-  if ($('#formWrapper').css('left')==='-400px'){
+  if ($('#formWrapper').css('left')==='-800px'){
     $("#formWrapper").animate({'left' : '150px'}, {duration : 400});
   }else{
-    $("#formWrapper").animate({'left' : '-400px'}, {duration : 400});
+    $("#formWrapper").animate({'left' : '-800px'}, {duration : 400});
   }
 
 }
@@ -583,7 +584,7 @@ function animateIn(evt){
   max-width: 700px;
   margin-top: 30px;
   position: absolute;
-  left: -400px;
+  left: -800px;
   /* transform: scale(1.2,1.2);; */
   width: 150%;
   background-color: #6e6969;
