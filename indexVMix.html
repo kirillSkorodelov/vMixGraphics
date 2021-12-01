@@ -72,6 +72,8 @@
       
     </div>
 
+    <div class="animClickArea" id="animClickArea"></div>
+
     <div class="showFormHotspot">	
         <button onclick="showForm()" type="button" class="showFormButton btn btn-info">Hide/Show form</button>
     </div>
@@ -111,7 +113,7 @@ version = 'Pack01'
 var colorOne = $('#color1')[0].value.toString().replace(/#/g,"")//doesn't work
 
 // Animate in on double click
-$(window).dblclick(animateIn);
+$("#animClickArea").dblclick(animateIn);
 
 //Animate out on triple click (doesn't work in vMix)
 // window.addEventListener('click', function (evt) {
@@ -121,7 +123,8 @@ $(window).dblclick(animateIn);
 
 //Animate out on middleclick 
 //let clearAnim = document.getElementById('formWrapper')
-window.addEventListener('auxclick', function(e) {
+$("#animClickArea").on('auxclick', function(e) {
+    e.preventDefault()
   if (e.button == 1)
     animateOut()
 })
@@ -693,6 +696,7 @@ textarea{
   line-height: 110%;
   margin-bottom: 5px;
   
+  
 }
 
 .title{
@@ -707,13 +711,14 @@ textarea{
 .draggable.tab{
   line-height: 0.5;
   margin-bottom: 20px;
-  margin-right: 10divipx;
-  border: 1px solid #337ab7;
+  margin-right: 10px;
+  border: 1px solid #ffffff;
   border-radius: 4px 4px 4px 4px;
   padding: 15px 8px;
   font-weight: normal;
   font-size: 30px;
   cursor: context-menu;
+  color: rgb(255, 255, 255);
 }
 
 .draggable.tab:hover{
@@ -788,7 +793,16 @@ input[type="checkbox"] {
 .jscolor-btn-close{
     background-color: rgb(66, 66, 66);
     border-radius: 5px;
- 
+}
+
+.animClickArea{
+    position:absolute;
+    left:0px;
+	background: rgba(60, 134, 0, 0);
+    width: 1920px;
+    height: 1080px;
+    margin: 0 auto;
+    z-index: -1;
 }
 
 .showFormHotspot{
@@ -829,6 +843,10 @@ input[type="checkbox"] {
 }
 .showFormHotspot:hover .showFormButton{ 
 	display:block;
+}
+
+.dropdown-toggle{
+    display: none;
 }
 /* END OF CONTROLS */
 
